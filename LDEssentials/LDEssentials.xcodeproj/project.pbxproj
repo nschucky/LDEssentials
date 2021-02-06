@@ -53,8 +53,8 @@
 		C3DEDBD825CE92A700F6FA55 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3582B8525CE83950029156F /* SharedTestHelpers.swift */; };
 		C3DEDBE125CE92B100F6FA55 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3582B8625CE83950029156F /* XCTestCase+MemoryLeakTracking.swift */; };
 		C3DEDC1925CF276800F6FA55 /* LDEssentialsiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DEDC1025CF276700F6FA55 /* LDEssentialsiOS.framework */; };
-		C3DEDC1E25CF276800F6FA55 /* LDEssentialsiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEDC1D25CF276800F6FA55 /* LDEssentialsiOSTests.swift */; };
 		C3DEDC2025CF276800F6FA55 /* LDEssentialsiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = C3DEDC1225CF276700F6FA55 /* LDEssentialsiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C3DEDC4625CF2D7200F6FA55 /* FeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,8 +138,8 @@
 		C3DEDC1225CF276700F6FA55 /* LDEssentialsiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDEssentialsiOS.h; sourceTree = "<group>"; };
 		C3DEDC1325CF276700F6FA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3DEDC1825CF276800F6FA55 /* LDEssentialsiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LDEssentialsiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3DEDC1D25CF276800F6FA55 /* LDEssentialsiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDEssentialsiOSTests.swift; sourceTree = "<group>"; };
 		C3DEDC1F25CF276800F6FA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,7 +371,7 @@
 		C3DEDC1C25CF276800F6FA55 /* LDEssentialsiOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				C3DEDC1D25CF276800F6FA55 /* LDEssentialsiOSTests.swift */,
+				C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */,
 				C3DEDC1F25CF276800F6FA55 /* Info.plist */,
 			);
 			path = LDEssentialsiOSTests;
@@ -685,7 +685,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3DEDC1E25CF276800F6FA55 /* LDEssentialsiOSTests.swift in Sources */,
+				C3DEDC4625CF2D7200F6FA55 /* FeedViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
