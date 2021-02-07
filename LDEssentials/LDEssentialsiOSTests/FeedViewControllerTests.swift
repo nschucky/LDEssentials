@@ -8,42 +8,7 @@
 import XCTest
 import UIKit
 import LDEssentials
-
-final class FeedViewController: UITableViewController {
-    
-    var loader: FeedLoader?
-    
-    convenience init(loader: FeedLoader) {
-        self.init()
-        self.loader = loader
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        load()
-    }
-    
-    @objc private func load() {
-        refreshControl?.beginRefreshing()
-        loader?.load { [weak self] _ in
-            self?.refreshControl?.endRefreshing()
-        }
-    }
-    
-}
-
-private extension FeedViewController {
-    func simulateUserInitiatedFeedLoad() {
-        refreshControl?.simulatePullToRefresh()
-    }
-    
-    var isShowingLoadingIndicator: Bool {
-        return refreshControl?.isRefreshing == true
-    }
-}
+import LDEssentialsiOS
 
 class FeedViewControllerTests: XCTestCase {
     
@@ -99,14 +64,6 @@ class FeedViewControllerTests: XCTestCase {
         
         func completeFeedLoading(at index: Int = 0) {
             completions[index](.success([]))
-        }
-    }
-}
-
-extension UIRefreshControl {
-    func simulatePullToRefresh() {
-        allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { (target as NSObject).perform(Selector($0)) }
         }
     }
 }
