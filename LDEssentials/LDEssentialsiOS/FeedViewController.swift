@@ -10,7 +10,8 @@ import LDEssentials
 
 final public class FeedViewController: UITableViewController {
     
-    var loader: FeedLoader?
+    private var loader: FeedLoader?
+    private var tableModel: [FeedImage] = []
     
     public convenience init(loader: FeedLoader) {
         self.init()
@@ -27,28 +28,23 @@ final public class FeedViewController: UITableViewController {
     
     @objc private func load() {
         refreshControl?.beginRefreshing()
-        loader?.load { [weak self] _ in
+        loader?.load { [weak self] result in
+            self?.tableModel = (try? result.get()) ?? []
+            self?.tableView.reloadData()
             self?.refreshControl?.endRefreshing()
         }
     }
     
-}
-
-extension FeedViewController {
-    public func simulateUserInitiatedFeedLoad() {
-        refreshControl?.simulatePullToRefresh()
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableModel.count
     }
     
-    public var isShowingLoadingIndicator: Bool {
-        return refreshControl?.isRefreshing == true
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellModel = tableModel[indexPath.row]
+        let cell = FeedImageCell()
+        cell.locationContainer.isHidden = (cellModel.location == nil)
+        cell.locationLabel.text = cellModel.location
+        cell.descriptionLabel.text = cellModel.description
+        return cell
     }
 }
-
-extension UIRefreshControl {
-    func simulatePullToRefresh() {
-        allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { (target as NSObject).perform(Selector($0)) }
-        }
-    }
-}
-
