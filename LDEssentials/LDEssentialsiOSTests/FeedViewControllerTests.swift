@@ -20,10 +20,10 @@ class FeedViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadAllCount, 1)
         
-        sut.simulateUserInitiatedFeedLoad()
+        sut.simulateUserInitiatedFeedReload()
         XCTAssertEqual(loader.loadAllCount, 2)
         
-        sut.simulateUserInitiatedFeedLoad()
+        sut.simulateUserInitiatedFeedReload()
         XCTAssertEqual(loader.loadAllCount, 3)
     }
     
@@ -36,7 +36,7 @@ class FeedViewControllerTests: XCTestCase {
         loader.completeFeedLoading()
         XCTAssertFalse(sut.isShowingLoadingIndicator)
         
-        sut.simulateUserInitiatedFeedLoad()
+        sut.simulateUserInitiatedFeedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator)
         
         loader.completeFeedLoading(at: 1)
@@ -58,9 +58,22 @@ class FeedViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: [image0])
         
         
-        sut.simulateUserInitiatedFeedLoad()
+        sut.simulateUserInitiatedFeedReload()
         loader.completeFeedLoading(with: [image0, image1, image2, image3], at: 1)
         assertThat(sut, isRendering: [image0, image1, image2, image3])
+    }
+    
+    func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let image0 = makeImage()
+        let (sut, loader) = makeSUT()
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [image0], at: 0)
+        assertThat(sut, isRendering: [image0])
+
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedLoadingWithError(at: 1)
+        assertThat(sut, isRendering: [image0])
     }
     
     private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
@@ -110,11 +123,17 @@ class FeedViewControllerTests: XCTestCase {
         func completeFeedLoading(with feed: [FeedImage] = [], at index: Int = 0) {
             completions[index](.success(feed))
         }
+        
+        func completeFeedLoadingWithError(at index: Int) {
+            let error = NSError(domain: "an error", code: 000)
+            completions[index](.failure(error))
+        }
     }
 }
 
 private extension FeedViewController {
-    func simulateUserInitiatedFeedLoad() {
+    
+    func simulateUserInitiatedFeedReload() {
         refreshControl?.simulatePullToRefresh()
     }
     
