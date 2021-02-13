@@ -237,6 +237,22 @@ class FeedViewControllerTests: XCTestCase {
         }
     }
     
+    func test_feedImageView_cancelsImageURLPreloadingWhenNotNearVisibleAnymore() {
+        let image0 = makeImage(url: URL(string: "http://url-0.com")!)
+        let image1 = makeImage(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [image0, image1])
+        XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not near visible")
+
+        sut.simulateFeedImageViewNotNearVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [image0.url], "Expected first cancelled image URL request once first image is not near visible anymore")
+
+        sut.simulateFeedImageViewNotNearVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
+    }
+    
     private func assertThat(_ sut: FeedViewController, hasViewConfigureFor image: FeedImage, at index: Int, file: StaticString = #file, line: UInt = #line) {
         let view = sut.feedImageView(at: index)
         guard let cell = view as? FeedImageCell else {
@@ -351,9 +367,17 @@ private extension FeedViewController {
     }
     
     func simulateFeedImageViewNearVisible(at row: Int) {
-        let delegate = tableView.prefetchDataSource
+        let ds = tableView.prefetchDataSource
         let indexPath = IndexPath(row: row, section: 0)
-        delegate?.tableView(tableView, prefetchRowsAt: [indexPath])
+        ds?.tableView(tableView, prefetchRowsAt: [indexPath])
+    }
+    
+    func simulateFeedImageViewNotNearVisible(at row: Int) {
+        simulateFeedImageViewNearVisible(at: row)
+        
+        let ds = tableView.prefetchDataSource
+        let indexPath = IndexPath(row: row, section: 0)
+        ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [indexPath])
     }
     
     var feedImagesSection: Int {
