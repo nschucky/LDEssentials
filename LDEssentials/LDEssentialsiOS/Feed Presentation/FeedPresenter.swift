@@ -1,5 +1,5 @@
 //
-//  FeedViewModel.swift
+//  FeedPresenter.swift
 //  LDEssentialsiOS
 //
 //  Created by Antonio Alves on 2/13/21.
@@ -8,7 +8,15 @@
 import Foundation
 import LDEssentials
 
-final class FeedViewModel {
+protocol FeedLoadingView: class {
+    func display(isLoading: Bool)
+}
+
+protocol FeedView {
+    func display(feed: [FeedImage])
+}
+
+final class FeedPresenter {
     
     typealias Observer<T> = (T) -> Void
     private let feedLoader: FeedLoader
@@ -17,16 +25,17 @@ final class FeedViewModel {
         self.feedLoader = feedLoader
     }
     
-    var onLoadingStateChange: Observer<Bool>?
-    var onFeedLoad: Observer<[FeedImage]>?
+    weak var feedLoadingView: FeedLoadingView?
+    var feedView: FeedView?
     
     func loadFeed() {
-        onLoadingStateChange?(true)
+        feedLoadingView?.display(isLoading: true)
         feedLoader.load { [weak self] result in
             if let feed = try? result.get() {
-                self?.onFeedLoad?(feed)
+                self?.feedView?.display(feed: feed)
             }
-            self?.onLoadingStateChange?(false)
+            self?.feedLoadingView?.display(isLoading: false)
         }
+        
     }
 }
