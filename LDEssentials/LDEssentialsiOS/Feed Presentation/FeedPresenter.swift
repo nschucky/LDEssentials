@@ -8,16 +8,8 @@
 import Foundation
 import LDEssentials
 
-struct FeedLoadingViewModel {
-    let isLoading: Bool
-}
-
 protocol FeedLoadingView {
     func display(_ viewModel: FeedLoadingViewModel)
-}
-
-struct FeedViewModel {
-    let feed: [FeedImage]
 }
 
 protocol FeedView {
@@ -25,25 +17,24 @@ protocol FeedView {
 }
 
 final class FeedPresenter {
-    
-    private let feedLoadingView: FeedLoadingView
     private let feedView: FeedView
+    private let loadingView: FeedLoadingView
     
-    init(feedLoadingView: FeedLoadingView, feedView: FeedView) {
-        self.feedLoadingView = feedLoadingView
+    init(feedView: FeedView, loadingView: FeedLoadingView) {
         self.feedView = feedView
+        self.loadingView = loadingView
     }
-    
+
     func didStartLoadingFeed() {
-        feedLoadingView.display(FeedLoadingViewModel(isLoading: true))
+        loadingView.display(FeedLoadingViewModel(isLoading: true))
     }
     
     func didFinishLoadingFeed(with feed: [FeedImage]) {
         feedView.display(FeedViewModel(feed: feed))
-        feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(FeedLoadingViewModel(isLoading: false))
     }
     
     func didFinishLoadingFeed(with error: Error) {
-        feedLoadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(FeedLoadingViewModel(isLoading: false))
     }
 }

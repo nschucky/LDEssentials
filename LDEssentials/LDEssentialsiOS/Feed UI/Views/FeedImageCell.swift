@@ -9,13 +9,12 @@ import UIKit
 
 public final class FeedImageCell: UITableViewCell {
     
-    var onRetry: (() -> Void)?
     
-    public var locationContainer = UIView()
-    public var locationLabel = UILabel()
-    public var descriptionLabel = UILabel()
-    public var feedImageContainer = UIView()
-    public var feedImageView = UIImageView()
+    public let locationContainer = UIView()
+    public let locationLabel = UILabel()
+    public let descriptionLabel = UILabel()
+    public let feedImageContainer = UIView()
+    public let feedImageView = UIImageView()
     
     private(set) public lazy var feedImageRetryButton: UIButton = {
         let button = UIButton()
@@ -23,6 +22,8 @@ public final class FeedImageCell: UITableViewCell {
         return button
     }()
     
+    var onRetry: (() -> Void)?
+
     @objc private func retryButtonTapped() {
         onRetry?()
     }
