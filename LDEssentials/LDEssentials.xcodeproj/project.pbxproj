@@ -81,7 +81,7 @@
 		C3DEDBE125CE92B100F6FA55 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3582B8625CE83950029156F /* XCTestCase+MemoryLeakTracking.swift */; };
 		C3DEDC1925CF276800F6FA55 /* LDEssentialsiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DEDC1025CF276700F6FA55 /* LDEssentialsiOS.framework */; };
 		C3DEDC2025CF276800F6FA55 /* LDEssentialsiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = C3DEDC1225CF276700F6FA55 /* LDEssentialsiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3DEDC4625CF2D7200F6FA55 /* FeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */; };
+		C3DEDC4625CF2D7200F6FA55 /* FeedUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DEDC4525CF2D7200F6FA55 /* FeedUIIntegrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,7 +211,7 @@
 		C3DEDC1325CF276700F6FA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3DEDC1825CF276800F6FA55 /* LDEssentialsiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LDEssentialsiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3DEDC1F25CF276800F6FA55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTests.swift; sourceTree = "<group>"; };
+		C3DEDC4525CF2D7200F6FA55 /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,37 +482,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		C3D50F0325D7B6B100728108 /* Helpers */ = {
+		C3D50F0425D7B6B700728108 /* Feed UI */ = {
+			isa = PBXGroup;
+			children = (
+				C3DEDC4525CF2D7200F6FA55 /* FeedUIIntegrationTests.swift */,
+				C3D50F0625D7B6CF00728108 /* Helpers */,
+			);
+			path = "Feed UI";
+			sourceTree = "<group>";
+		};
+		C3D50F0625D7B6CF00728108 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				C38B474525E0618C00FACED3 /* UIButton+TestHelpers.swift */,
 				C38B474C25E0619A00FACED3 /* UIControl+TestHelpers.swift */,
 				C38B475325E061A200FACED3 /* UIImage+TestHelpers.swift */,
 				C38B475A25E061B700FACED3 /* UIRefreshControl+TestHelpers.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C3D50F0425D7B6B700728108 /* Feed UI */ = {
-			isa = PBXGroup;
-			children = (
-				C3D50F0525D7B6C200728108 /* Controllers */,
-			);
-			path = "Feed UI";
-			sourceTree = "<group>";
-		};
-		C3D50F0525D7B6C200728108 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C3DEDC4525CF2D7200F6FA55 /* FeedViewControllerTests.swift */,
-				C3D50F0625D7B6CF00728108 /* Helpers */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		C3D50F0625D7B6CF00728108 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
 				C38B472425E0605600FACED3 /* FeedImageCell+TestHelpers.swift */,
 				C38B472B25E0609600FACED3 /* FeedViewController+TestHelpers.swift */,
 				C38B473225E060CD00FACED3 /* FeedViewControllerTests+Assertions.swift */,
@@ -555,7 +540,6 @@
 		C3DEDC1C25CF276800F6FA55 /* LDEssentialsiOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				C3D50F0325D7B6B100728108 /* Helpers */,
 				C3D50F0425D7B6B700728108 /* Feed UI */,
 				C3DEDC1F25CF276800F6FA55 /* Info.plist */,
 			);
@@ -893,7 +877,7 @@
 				C38B475B25E061B700FACED3 /* UIRefreshControl+TestHelpers.swift in Sources */,
 				C38B473325E060CD00FACED3 /* FeedViewControllerTests+Assertions.swift in Sources */,
 				C38B475425E061A200FACED3 /* UIImage+TestHelpers.swift in Sources */,
-				C3DEDC4625CF2D7200F6FA55 /* FeedViewControllerTests.swift in Sources */,
+				C3DEDC4625CF2D7200F6FA55 /* FeedUIIntegrationTests.swift in Sources */,
 				C38B474D25E0619A00FACED3 /* UIControl+TestHelpers.swift in Sources */,
 				C38B472525E0605600FACED3 /* FeedImageCell+TestHelpers.swift in Sources */,
 				C38B474625E0618C00FACED3 /* UIButton+TestHelpers.swift in Sources */,
