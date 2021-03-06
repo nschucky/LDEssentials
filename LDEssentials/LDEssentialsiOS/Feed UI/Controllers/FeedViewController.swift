@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import LDEssentials
 
 protocol FeedViewControllerDelegate {
     func didRequestFeedRefresh()
@@ -14,6 +15,7 @@ protocol FeedViewControllerDelegate {
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     var delegate: FeedViewControllerDelegate?
+    private(set) public var errorView = ErrorView()
     
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }
@@ -21,6 +23,14 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableHeaderView = errorView.makeContainer()
+        
+        errorView.onHide = { [weak self] in
+            self?.tableView.beginUpdates()
+            self?.tableView.sizeTableHeaderToFit()
+            self?.tableView.endUpdates()
+        }
         
         refresh()
     }
@@ -62,11 +72,56 @@ extension FeedViewController: FeedLoadingView {
         delegate?.didRequestFeedRefresh()
     }
     
-    func display(_ viewModel: FeedLoadingViewModel) {
-        if viewModel.isLoading {
-            refreshControl?.beginRefreshing()
-        } else {
-            refreshControl?.endRefreshing()
+    public func display(_ viewModel: FeedLoadingViewModel) {
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
+
+    }
+}
+
+extension FeedViewController: FeedErrorView {
+    public func display(_ viewModel: FeedErrorViewModel) {
+        errorView.message = viewModel.message
+    }
+    
+    
+}
+
+extension UIView {
+    
+    public func makeContainer() -> UIView {
+        let container = UIView()
+        container.backgroundColor = .clear
+        container.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topAnchor.constraint(equalTo: container.topAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        
+        return container
+    }
+    
+}
+
+extension UITableView {
+    func sizeTableHeaderToFit() {
+        guard let header = tableHeaderView else { return }
+        
+        let size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        
+        let needsFrameUpdate = header.frame.height != size.height
+        if needsFrameUpdate {
+            header.frame.size.height = size.height
+            tableHeaderView = header
         }
+    }
+}
+
+extension UIRefreshControl {
+    func update(isRefreshing: Bool) {
+        isRefreshing ? beginRefreshing() : endRefreshing()
     }
 }
