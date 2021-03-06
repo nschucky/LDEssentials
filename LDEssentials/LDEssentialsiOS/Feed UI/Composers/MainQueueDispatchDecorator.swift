@@ -15,17 +15,19 @@ final class MainQueueDispatchDecorator<T> {
         self.decoratee = decoratee
     }
     
-    private func dispatch(_ completion: @escaping () -> ()) {
-        guard Thread.isMainThread else { return DispatchQueue.main.async(execute: completion) }
+    func dispatch(completion: @escaping () -> Void) {
+        guard Thread.isMainThread else {
+            return DispatchQueue.main.async(execute: completion)
+        }
+        
         completion()
     }
 }
+
 extension MainQueueDispatchDecorator: FeedLoader where T == FeedLoader {
-    
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        decoratee.load { [weak self] (result) in
-            guard let self = self else { return }
-            self.dispatch { completion(result) }
+        decoratee.load { [weak self] result in
+            self?.dispatch { completion(result) }
         }
     }
 }

@@ -16,6 +16,7 @@ extension FeedUIIntegrationTests {
         // MARK: - FeedLoader
         
         private var feedRequests = [(FeedLoader.Result) -> Void]()
+
         
         var loadFeedCallCount: Int {
             return feedRequests.count
