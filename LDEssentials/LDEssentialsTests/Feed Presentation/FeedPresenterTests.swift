@@ -9,7 +9,6 @@ import XCTest
 import LDEssentials
 
 
-
 class FeedPresenterTests: XCTestCase {
     
     func test_title_isLocalized() {
