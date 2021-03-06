@@ -1,0 +1,10 @@
+/* 
+  Feed.strings
+  LDEssentials
+
+  Created by Antonio Alves on 3/5/21.
+  
+*/
+
+"FEED_VIEW_TITLE" = "Το Feed μου";
+"FEED_VIEW_CONNECTION_ERROR" = "Δεν ήταν δυνατή η σύνδεση στο διακομιστή";

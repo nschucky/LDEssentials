@@ -1,0 +1,10 @@
+/* 
+  Feed.strings
+  LDEssentials
+
+  Created by Antonio Alves on 3/5/21.
+  
+*/
+
+"FEED_VIEW_TITLE" = "My Feed";
+"FEED_VIEW_CONNECTION_ERROR" = "Couldn't connect to server";
