@@ -19,16 +19,27 @@ struct FeedErrorViewModel {
      }
 }
 
+struct FeedLoadingViewModel {
+    let isLoading: Bool
+}
+
+protocol FeedLoadingView {
+    func display(_ viewModel: FeedLoadingViewModel)
+}
+
 final class FeedPresenter {
     
+    let loadingView: FeedLoadingView
     let errorView: FeedErrorView
     
-    init(errorView: FeedErrorView) {
+    init(loadingView: FeedLoadingView, errorView: FeedErrorView) {
+        self.loadingView = loadingView
         self.errorView = errorView
     }
     
     func didStartLoadingFeed() {
         errorView.display(.noError)
+        loadingView.display(FeedLoadingViewModel(isLoading: true))
     }
 }
 
@@ -39,23 +50,30 @@ class FeedPresenterTests: XCTestCase {
         XCTAssertTrue(view.messages.isEmpty, "Expected no view messages")
     }
     
-    func test_didStartLoadingFeed_displaysNoErrorMessage() {
+    func test_didStartLoadingFeed_displaysNoErrorMessageAndStartsLoading() {
         let (sut, view) = makeSUT()
         sut.didStartLoadingFeed()
-        XCTAssertEqual(view.messages, [.display(errorMessage: nil)])
+        XCTAssertEqual(view.messages, [
+                        .display(errorMessage: nil),
+                        .display(isLoading: true)])
     }
     
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedPresenter, view: ViewSpy) {
         let view = ViewSpy()
-        let sut = FeedPresenter(errorView: view)
+        let sut = FeedPresenter(loadingView: view, errorView: view)
         trackForMemoryLeaks(view)
         trackForMemoryLeaks(sut)
         return (sut, view)
     }
     
-    private class ViewSpy: FeedErrorView {
+    private class ViewSpy: FeedErrorView, FeedLoadingView {
+        
+        func display(_ viewModel: FeedLoadingViewModel) {
+            messages.append(.display(isLoading: viewModel.isLoading))
+        }
+        
         
         func display(_ viewModel: FeedErrorViewModel) {
             messages.append(.display(errorMessage: nil))
@@ -64,9 +82,10 @@ class FeedPresenterTests: XCTestCase {
         
         enum Message: Equatable {
             case display(errorMessage: String?)
+            case display(isLoading: Bool)
         }
         
-        var messages: [Message] = []
+        private(set) var messages: [Message] = []
     }
     
 }
