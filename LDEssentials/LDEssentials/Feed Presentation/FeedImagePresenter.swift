@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import LDEssentials
 
 protocol FeedImageView {
     associatedtype Image
