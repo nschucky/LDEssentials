@@ -5,8 +5,8 @@
 //  Created by Antonio Alves on 3/2/21.
 //
 
-import UIKit
 import LDEssentials
+import UIKit
 
 final class WeakRefVirtualProxy<T: AnyObject> {
      private weak var object: T?

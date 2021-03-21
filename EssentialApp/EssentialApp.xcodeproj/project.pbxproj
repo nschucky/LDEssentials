@@ -15,6 +15,10 @@
 		C3FE435A260703AE0013C543 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3FE4358260703AE0013C543 /* LaunchScreen.storyboard */; };
 		C3FE4365260703AF0013C543 /* EssentialAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE4364260703AF0013C543 /* EssentialAppTests.swift */; };
 		C3FE4370260703AF0013C543 /* EssentialAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE436F260703AF0013C543 /* EssentialAppUITests.swift */; };
+		C3FEE8E22607059A0029182D /* LDEssentials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FEE8E02607059A0029182D /* LDEssentials.framework */; };
+		C3FEE8E32607059A0029182D /* LDEssentials.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3FEE8E02607059A0029182D /* LDEssentials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3FEE8E42607059A0029182D /* LDEssentialsiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3FEE8E12607059A0029182D /* LDEssentialsiOS.framework */; };
+		C3FEE8E52607059A0029182D /* LDEssentialsiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3FEE8E12607059A0029182D /* LDEssentialsiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C3FEE8E62607059A0029182D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C3FEE8E32607059A0029182D /* LDEssentials.framework in Embed Frameworks */,
+				C3FEE8E52607059A0029182D /* LDEssentialsiOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C3FE434A260703AA0013C543 /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3FE434D260703AA0013C543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +68,8 @@
 		C3FE436B260703AF0013C543 /* EssentialAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3FE436F260703AF0013C543 /* EssentialAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialAppUITests.swift; sourceTree = "<group>"; };
 		C3FE4371260703AF0013C543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3FEE8E02607059A0029182D /* LDEssentials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LDEssentials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3FEE8E12607059A0029182D /* LDEssentialsiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LDEssentialsiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +77,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3FEE8E22607059A0029182D /* LDEssentials.framework in Frameworks */,
+				C3FEE8E42607059A0029182D /* LDEssentialsiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +106,7 @@
 				C3FE4363260703AF0013C543 /* EssentialAppTests */,
 				C3FE436E260703AF0013C543 /* EssentialAppUITests */,
 				C3FE434B260703AA0013C543 /* Products */,
+				C3FEE8DF2607059A0029182D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +152,15 @@
 			path = EssentialAppUITests;
 			sourceTree = "<group>";
 		};
+		C3FEE8DF2607059A0029182D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3FEE8E02607059A0029182D /* LDEssentials.framework */,
+				C3FEE8E12607059A0029182D /* LDEssentialsiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +171,7 @@
 				C3FE4346260703AA0013C543 /* Sources */,
 				C3FE4347260703AA0013C543 /* Frameworks */,
 				C3FE4348260703AA0013C543 /* Resources */,
+				C3FEE8E62607059A0029182D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
