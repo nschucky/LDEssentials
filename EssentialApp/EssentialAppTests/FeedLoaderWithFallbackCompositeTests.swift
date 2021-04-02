@@ -7,29 +7,7 @@
 
 import XCTest
 import LDEssentials
-
-class FeedLoaderWithFallbackComposite: FeedLoader {
-    
-    let primary: FeedLoader
-    let fallback: FeedLoader
-    
-    init(primary: FeedLoader, fallback: FeedLoader) {
-        self.primary = primary
-        self.fallback = fallback
-    }
-    
-    func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        primary.load { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .failure:
-                self.fallback.load(completion: completion)
-            case .success:
-                completion(result)
-            }
-        }
-    }
-}
+import EssentialApp
 
 class FeedLoaderWithFallbackCompositeTests: XCTestCase {
     
