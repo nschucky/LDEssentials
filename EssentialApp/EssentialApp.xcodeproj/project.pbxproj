@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C327DB242617A4C000D148E1 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327DB232617A4C000D148E1 /* FeedLoaderWithFallbackComposite.swift */; };
 		C327DB2C2617AFA900D148E1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327DB2B2617AFA900D148E1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
+		C327DB2F26183D9D00D148E1 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C327DB2E26183D9D00D148E1 /* FeedImageDataLoaderWithFallbackComposite.swift */; };
 		C3F860422611B8890057FCB1 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F860412611B8890057FCB1 /* FeedLoaderWithFallbackCompositeTests.swift */; };
 		C3FE434E260703AA0013C543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE434D260703AA0013C543 /* AppDelegate.swift */; };
 		C3FE4350260703AA0013C543 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FE434F260703AA0013C543 /* SceneDelegate.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		C327DB232617A4C000D148E1 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		C327DB2B2617AFA900D148E1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		C327DB2E26183D9D00D148E1 /* FeedImageDataLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		C3F860412611B8890057FCB1 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		C3FE434A260703AA0013C543 /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3FE434D260703AA0013C543 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				C3FE434F260703AA0013C543 /* SceneDelegate.swift */,
 				C3FE4351260703AA0013C543 /* ViewController.swift */,
 				C327DB232617A4C000D148E1 /* FeedLoaderWithFallbackComposite.swift */,
+				C327DB2E26183D9D00D148E1 /* FeedImageDataLoaderWithFallbackComposite.swift */,
 				C3FE4353260703AB0013C543 /* Main.storyboard */,
 				C3FE4356260703AE0013C543 /* Assets.xcassets */,
 				C3FE4358260703AE0013C543 /* LaunchScreen.storyboard */,
@@ -246,6 +249,7 @@
 				C3FE434E260703AA0013C543 /* AppDelegate.swift in Sources */,
 				C327DB242617A4C000D148E1 /* FeedLoaderWithFallbackComposite.swift in Sources */,
 				C3FE4350260703AA0013C543 /* SceneDelegate.swift in Sources */,
+				C327DB2F26183D9D00D148E1 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
