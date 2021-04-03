@@ -31,11 +31,6 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         expect(sut: sut, toCompleteWith: .failure(anyNSError()))
     }
     
-    
-    func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
     private func expect(sut: FeedLoaderWithFallbackComposite, toCompleteWith expectedResult: FeedLoader.Result, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         sut.load { receivedResult in
@@ -83,8 +78,5 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         func load(completion: @escaping (FeedLoader.Result) -> Void) {
             completion(result)
         }
-        
-        
     }
-    
 }
