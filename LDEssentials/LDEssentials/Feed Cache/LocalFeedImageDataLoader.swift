@@ -34,7 +34,8 @@ extension LocalFeedImageDataLoader: FeedImageDataCache {
     }
 }
 
-extension LocalFeedImageDataLoader: FeedImageDataLoaderService {
+extension LocalFeedImageDataLoader: FeedImageDataLoaderService, FeedImageDataLoader {
+    
     public enum LoadError: Error {
         case failed
         case notFound
@@ -50,5 +51,39 @@ extension LocalFeedImageDataLoader: FeedImageDataLoaderService {
         }
         
         throw LoadError.notFound
+    }
+    
+    private final class LoadImageDataTask: FeedImageDataLoaderTask {
+        private var completion: ((FeedImageDataLoader.Result) -> Void)?
+        
+        init(_ completion: @escaping (FeedImageDataLoader.Result) -> Void) {
+            self.completion = completion
+        }
+        
+        func complete(with result: FeedImageDataLoader.Result) {
+            completion?(result)
+        }
+        
+        func cancel() {
+            preventFurtherCompletions()
+        }
+        
+        private func preventFurtherCompletions() {
+            completion = nil
+        }
+    }
+    
+    public func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
+        let task = LoadImageDataTask(completion)
+        
+        guard let imageData = try? store.retrieve(dataForURL: url) else {
+            //completion(.failure(NSError(domain: "Unable to retrieve from store", code: 2919, userInfo: nil)))
+            task.complete(with: .failure(LoadError.notFound))
+            return task
+        }
+        
+        task.complete(with: .success(imageData))
+
+        return task
     }
 }

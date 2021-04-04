@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class LocalFeedLoader {
+public class LocalFeedLoader: FeedLoader {
     
     private let store: FeedStore
     private let currentDate: () -> Date
@@ -17,11 +17,18 @@ public class LocalFeedLoader {
         self.currentDate = currentDate
     }
     
-    public func load() throws -> [FeedImage] {
-        if let cache = try store.retrieve(), FeedCachePolicy.validate(cache.timestamp, against: currentDate()) {
-            return cache.feed.toModels()
+    public func load(completion: @escaping (FeedLoader.Result) -> Void) {
+        guard let cachedFeed = try? store.retrieve() else {
+            completion(.failure(NSError(domain: "Unable to retrieve from store", code: 2919, userInfo: nil)))
+            return
         }
-        return []
+        
+        guard !cachedFeed.feed.isEmpty, FeedCachePolicy.validate(cachedFeed.timestamp, against: self.currentDate()) else {
+            completion(.failure(NSError(domain: "Empty or invalid feed", code: 2920, userInfo: nil)))
+            return
+        }
+        
+        completion(.success(cachedFeed.feed.toModels()))
     }
 }
 
